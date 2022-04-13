@@ -1,0 +1,181 @@
+1. What are the different data types present in javascript?
+
+    Primitive types
+    -can only store a single value
+    String
+    Number
+    BigInt
+    Boolean
+    Undefined
+    Null
+    Symbol
+    Typeof
+
+
+    Non-primitive types
+    -store multiple and complex values
+    Object
+    **Anything data type that is not primitive data type, is of Object type in javascript
+
+2. Explain Hoisting in JavaScript
+    Hoisting is a default behavior of javascript where all the variable and function declarations are moved on top
+
+    hoistedFunction();  // Outputs " Hello world! " even when the function is declared after calling
+
+    function hoistedFunction(){ 
+    console.log(" Hello world! ");
+    }
+    // Hoisting takes place in the local scope as well
+    function doSomething(){
+        x = 33;
+        console.log(x);
+        var x;
+    }
+
+3. Difference between '==' and '===' operators
+    '==' used to compare values 
+    '===' used to compare both value and type
+
+    var x = 2;
+    var y = "2";
+    (x == y)  // Returns true since the value of both x and y is the same
+
+    (x === y) // Returns false since the typeof x is "number" and typeof y is "string"
+
+4. Explain Implicit Type Coercion in JavaScript
+    -automatic conversion of value from one data type to another. It takes place when the operands of an experssion are of different data types.
+
+    String Coercion
+    -string coercion takes place while using the + operator. When a number is added to a string, the number type is always converted to the string type.
+
+    var x = 3;
+    var y = "3";
+    x + y // Returns "33" 
+
+    var x = 24;
+    var y = "Hello";
+    x + y   // Returns "24Hello";
+
+    **Note - Type coercion also takes place when using the ‘ - ‘ operator, 
+    but the difference while using ‘ - ‘ operator is that, a string is converted to a number and then subtraction takes place.
+
+    var x = 3;
+    var y = "3";
+    x - y    //Returns 0 since the variable y (string type) is converted to a number type
+
+    Boolean Coercion
+    Boolean coercion takes place when using logical operators, ternary operators, if statements and loop checks. 
+    To understand boolean coercion in if statements and operators, we need to understand truthy and falsy values.
+
+    Truthy values are those which will be converted (coerced) to true . Falsy values are those which will be converted to false .
+
+    All values except false, 0, 0n, -0, “”, null, undefined and NaN are truthy values.
+
+    var x = 0;
+    var y = 23;
+            
+    if(x) { console.log(x) }   // The code inside this block will not run since the value of x is 0(Falsy)  
+            
+    if(y) { console.log(y) }    // The code inside this block will run since the value of y is 23 (Truthy)
+
+5. Is javascript a statically typed or a dynamically typed language?
+    JavaScript is a dynamically typed language. In a dynamically typed language, the type of a variable is checked during run-time
+    in contrast to statically typed language, where the type of a variable is checked during compile-time.
+
+    Static typing 
+    string name;
+    name ="John"
+    name=34//not allowed
+
+    Variables have types
+    values have types
+    variables cannot change types
+
+    Dynamic typing
+    var name;
+    name= 'John'
+    name=34
+
+    Variables have no types 
+    values have types
+    variables change type dramatically
+
+6. What is NaN property in JavaScript?
+    NaN property represents “Not-a-Number” value. It indicates a value which is not a legal number.
+
+    typeof of a NaN will return a Number .
+
+    To check if a value is NaN, we use the isNaN() function,
+
+    **Note- isNaN() function converts the given value to a Number type, and then equates to NaN.
+
+    sNaN("Hello")  // Returns true
+    isNaN(345)   // Returns false
+    isNaN('1')  // Returns false, since '1' is converted to Number type which results in 0 ( a number) 
+    isNaN(true) // Returns false, since true converted to Number type results in 1 ( a number)
+    isNaN(false) // Returns false
+    isNaN(undefined) // Returns true
+
+7. Explain passed by value and passed by reference.
+    In JavaScript, primitive data types are passed by value and non-primitive data types are passed by reference. 
+
+    var y = 234;
+    var z = y;
+    assign operator knows that the value assigned to y is a primitive type (number type in this case), so when the
+    second line code executes, where the value of y is assigned to z, the assign operator takes the value of y (234) 
+    and allocates a new space in the memory and returns the address. Therefore, variable z is not pointing to the 
+    location of variable y, instead it is pointing to a new location in the memory.
+
+    var y = #8454; // y pointing to address of the value 234
+
+    var z = y; 
+            
+    var z = #5411; // z pointing to a completely new address of the value 234
+            
+    // Changing the value of y
+    y = 23;
+    console.log(z);  // Returns 234, since z points to a new address in the memory so changes in y will not effect z
+
+
+    var obj = { name: "Vivek", surname: "Bisht" };
+
+    var obj2 = obj;
+
+    var obj = #8711;  // obj pointing to address of { name: "Vivek", surname: "Bisht" }
+
+    var obj2 = obj;
+            
+    var obj2 = #8711; // obj2 pointing to the same address 
+            
+            
+    // changing the value of obj1
+            
+    obj1.name = "Akki";
+            
+    console.log(obj2);
+            
+    // Returns {name:"Akki", surname:"Bisht"} since both the variables are pointing to the same address.
+    we can see that while passing non-primitive data types, the assign operator directly passes the address (reference).
+
+    Therefore, non-primitive data types are always passed by reference.
+
+    9. Explain Higher Order Functions in JavaScript 
+    Functions that operate on other functions, either by taking them as arguments or by returning them, are called higher-order functions.
+
+    Higher-order functionsare a result of functions being first-class citizens in javascript.
+
+    Examples of higher order functions:
+    function higherOrder(fn) {
+    fn();
+    }
+        
+    higherOrder(function() { console.log("Hello world") }); 
+
+    function higherOrder2() {
+    return function() {
+        return "Do something";
+    }
+    }
+            
+    var x = higherOrder2();
+    x()   // Returns "Do something"
